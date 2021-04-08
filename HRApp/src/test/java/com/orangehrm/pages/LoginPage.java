@@ -19,7 +19,6 @@ public class LoginPage {
 		Thread.sleep(2000);
 		pass.sendKeys(password);
 		Thread.sleep(2000);
-		submit.click();
-		
+		submit.click();		
 	}
 }
