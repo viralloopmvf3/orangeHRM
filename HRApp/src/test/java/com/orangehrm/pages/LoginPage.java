@@ -20,5 +20,6 @@ public class LoginPage {
 		pass.sendKeys(password);
 		Thread.sleep(2000);
 		submit.click();
+		
 	}
 }
