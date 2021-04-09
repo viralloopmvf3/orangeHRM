@@ -23,8 +23,19 @@
 
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng.xml</suiteXmlFile>
+						<suiteXmlFile>XMLFiles/${xmlFile}</suiteXmlFile>
 					</suiteXmlFiles>
+
+					<systemPropertyVariables>
+						<executionBrowser>
+							${browser}
+						</executionBrowser>
+						<appURL>
+							${urlToBetested}
+						</appURL>
+
+
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 

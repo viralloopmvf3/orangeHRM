@@ -1,12 +1,21 @@
 package com.orangehrm.pages;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import java.io.File;
@@ -39,13 +48,16 @@ public class BaseClass {
 		Reporter.log("Setting Done -- Test can be started",true);
 	}
 	
+	
+	@Parameters({"browser","urlToBeTested"})
 	@BeforeClass
-	public void setUp() {
+	public void setUp(String browser, String url) {
 		Reporter.log("Trying to start browser and getting application ready",true);
-		driver = BrowserFactory.startApplication(config.getBrowser(), config.getUrL(), driver);
+		driver = BrowserFactory.startApplication(browser, url, driver);
 		
 		Reporter.log("Browser and application is up and running",true);
 	}
+	
 	@AfterClass
 	public void tearDown() {
 		BrowserFactory.tearDown(driver);
@@ -55,7 +67,7 @@ public class BaseClass {
 	public void tearDownMethod(ITestResult result) throws IOException {
 		Reporter.log("Test is about to end",true);
 		if(result.getStatus()==ITestResult.FAILURE) {
-			//Helper.captureScreenshot(driver);
+			Helper.captureScreenshot(driver);
 			logger.fail("Test failed", MediaEntityBuilder.createScreenCaptureFromPath(Helper.captureScreenshot(driver)).build());
 		}
 		else if(result.getStatus()==ITestResult.SUCCESS) {
